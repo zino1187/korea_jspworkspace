@@ -1,3 +1,4 @@
+<%@ page  contentType="text/html;charset=utf-8"%>
 <!doctype html>
 <!DOCTYPE html>
 <html>
@@ -42,7 +43,7 @@ button:hover {
 }
 
 img.avatar {
-  width: 40%;
+  width: 150px;
   border-radius: 50%;
 }
 
@@ -66,24 +67,34 @@ span.psw {
   }
 }
 </style>
+
+<script>
+
+function login(){
+	//post방식으로 웹서버에 요청하자!!
+	form1.method="get"; // 문서의 body영역으로 즉 편지지에 데이터 나른다
+	form1.action="/member/login.jsp"; //요청 주소 
+	form1.submit(); //전송
+}
+</script>
 </head>
 <body>
 
 <h2>Login Form</h2>
 
-<form action="/action_page.php" method="post">
+<form name="form1">
   <div class="imgcontainer">
-    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+    <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" class="avatar">
   </div>
 
   <div class="container">
     <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
+    <input type="text" placeholder="Enter Username" name="id" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <input type="password" placeholder="Enter Password" name="pass" required>
         
-    <button type="submit">Login</button>
+    <button type="button" onClick="login()">Login</button>
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
