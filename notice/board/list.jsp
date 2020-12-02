@@ -1,7 +1,18 @@
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ page import="pet.Dog"%>
+<%@ page import="db.DBManager"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
 <%
-	Dog d = new Dog();
+	DBManager dbManager = new DBManager();
+	Connection con=dbManager.getConnection();
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+
+	//select 
+	String sql="select * from notice";
+	pstmt=con.prepareStatement(sql); //쿼리준비
+	rs = pstmt.executeQuery();//select문 실행
 %>
 <!DOCTYPE html>
 <html>
