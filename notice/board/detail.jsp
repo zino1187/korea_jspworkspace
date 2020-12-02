@@ -74,11 +74,13 @@ $(function(){
 	});
 
 	$($("input[type='button']")[1]).click(function(){//수정요청
-		$("form").attr({
-			method:"post",
-			action:"/board/regist.jsp"
-		});
-		$("form").submit(); //전송행위!!!
+		if(confirm("수정하시겠어요?")){
+			$("form").attr({
+				method:"post",
+				action:"/board/edit.jsp"
+			});
+			$("form").submit(); //전송행위!!!
+		}
 	});
 
 	$($("input[type='button']")[2]).click(function(){//삭제요청
@@ -98,6 +100,8 @@ $(function(){
 
 <div class="container">
   <form>
+	<input type="hidden" name="notice_id" value="<%=rs.getInt("notice_id")%>">
+
     <label for="fname">First Name</label>
     <input type="text" id="fname" name="author" value="<%=rs.getString("author")%>">
 
