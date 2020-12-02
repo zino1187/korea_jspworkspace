@@ -50,7 +50,7 @@ $(function(){
 	$("input[type='button']").click(function(){
 		//입력양식을 서버에 전송!!
 		$("form").attr({
-			method:"get",
+			method:"post",
 			action:"/board/regist.jsp"
 		});
 		$("form").submit(); //전송행위!!!
