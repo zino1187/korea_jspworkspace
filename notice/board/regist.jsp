@@ -38,10 +38,18 @@
 
 	con=DriverManager.getConnection(url, user, password);
 	if(con==null){
-		out.print("접속 실패");
+%>
+	<script>
+		alert("접속실패");
+		history.back();
+	</script>
+<%
 	}else{
-		out.print("접속 성공");
-
+%>
+	<script>
+		alert("접속성공");
+	</script>		
+<%
 		String sql="insert into notice(author, title, content) values(?,?,?)";
 		pstmt=con.prepareStatement(sql);
 		
@@ -53,12 +61,21 @@
 		int result = pstmt.executeUpdate();
 
 		if(result==0){
-			out.print("등록실패");
+%>
+		<script>
+			alert("등록실패");
+			history.back();
+		</script>
+<%
 		}else{
-			out.print("등록성공");
+%>
+		<script>
+			alert("등록성공");
+			location.href="/board/list.jsp";//list.jsp를 요청해야 한다...
+		</script>
+<%
 		}
 	}
-
 	//db에 연동에 사용된 모든 객체 닫기 
 	if(pstmt!=null){
 		pstmt.close();
