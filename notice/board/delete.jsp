@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ page import="db.DBManager"%>
 <%@ page import="java.sql.*"%>
+<%@ include file="/inc/lib.jsp"%>
 <%
 	String notice_id = request.getParameter("notice_id");
 
@@ -16,15 +17,9 @@
 	int result = pstmt.executeUpdate();//DML수행
 	//삭제 후 완료메시지 보여주고 list.jsp를 요청할 것!!
 	if(result==0){
-		out.print("<script>");
-		out.print("alert('삭제실패');");
-		out.print("history.back();");
-		out.print("</script>");
+		out.print(getMsgBack("삭제실패"));
 	}else{
-		out.print("<script>");
-		out.print("alert('글이 삭제되었습니다');");
-		out.print("location.href='/board/list.jsp';");
-		out.print("</script>");
+		out.print(getMsgURL("삭제성공","/board/list.jsp"));
 	}	
 	dbManager.release(con, pstmt);
 %>

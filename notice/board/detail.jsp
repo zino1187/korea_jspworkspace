@@ -118,7 +118,7 @@ $(function(){
   </form>
 </div>
 <div style="text-align:center">
-	Copyright All reserved java board
+	<%@ include file="/inc/footer.jsp"%>
 </div>
 </body>
 </html>
