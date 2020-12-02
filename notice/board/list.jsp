@@ -24,7 +24,8 @@ tr:nth-child(even) {
 <script>
 $(function(){
 	$("button").on("click",function(){
-		alert("나 눌렀니?");
+		//자바스크립트에서 링크 구현? 
+		location.href="/board/regist_form.jsp";
 	});
 }); //onload
 </script>
