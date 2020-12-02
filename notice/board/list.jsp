@@ -60,7 +60,7 @@ $(function(){
   <tr>
     <td>26</td>
     <td>
-		<a href="/board/detail.jsp"><%=rs.getString("title")%></a>
+		<a href="/board/detail.jsp?notice_id=<%=rs.getInt("notice_id")%>"><%=rs.getString("title")%></a>
 	</td>
     <td><%=rs.getString("author")%></td>
 	<td><%=rs.getString("regdate")%></td>

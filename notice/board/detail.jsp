@@ -1,7 +1,22 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ page import="db.DBManager"%>
+<%@ page import="java.sql.*"%>
 <%
-	String sql="select * from notice where notice_id=넘겨받은파라미터값";
+	String notice_id = request.getParameter("notice_id");
+	String sql="select * from notice where notice_id="+notice_id;
+	out.print("실행될 예정 SQL은 "+sql);
+	
+	DBManager dbManager = new DBManager();
 
+	Connection con=null;
+	PreparedStatement pstmt=null;
+	ResultSet rs=null;
+
+	con=dbManager.getConnection();//접속 후 그 결과 가져오기
+	pstmt=con.prepareStatement(sql);//쿼리준비
+	rs=pstmt.executeQuery();//쿼리수행
+
+	rs.next(); //커서 한컨 전진!!!
 %>
 <!DOCTYPE html>
 <html>
@@ -70,13 +85,13 @@ $(function(){
 <div class="container">
   <form>
     <label for="fname">First Name</label>
-    <input type="text" id="fname" name="author" placeholder="Your name..">
+    <input type="text" id="fname" name="author" value="<%=rs.getString("author")%>">
 
     <label for="lname">title</label>
-    <input type="text" id="lname" name="title" placeholder="Your title..">
+    <input type="text" id="lname" name="title" value="<%=rs.getString("title")%>">
 
 	<label for="subject">Content</label>
-    <textarea id="subject" name="content" placeholder="Write something.." style="height:200px"></textarea>
+    <textarea id="subject" name="content" placeholder="Write something.." style="height:200px"><%=rs.getString("content")%></textarea>
 
     <input type="button" value="전송">
   </form>
