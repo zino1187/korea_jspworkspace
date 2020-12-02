@@ -84,12 +84,13 @@ $(function(){
 	});
 
 	$($("input[type='button']")[2]).click(function(){//삭제요청
-		//입력양식을 서버에 전송!!
-		$("form").attr({
-			method:"post",
-			action:"/board/regist.jsp"
-		});
-		$("form").submit(); //전송행위!!!
+		if(confirm("삭제하시겠습니까?")){
+			$("form").attr({
+				method:"post",
+				action:"/board/delete.jsp"
+			});
+			$("form").submit(); //전송행위!!!
+		}
 	});
 
 
