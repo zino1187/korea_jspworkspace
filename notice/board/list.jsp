@@ -55,14 +55,18 @@ $(function(){
 	<th>등록일</th>
 	<th>조회수</th>
   </tr>
+
+	<%while(rs.next()){%>
   <tr>
     <td>26</td>
-    <td>제목올곳</td>
-    <td>작성자올곳</td>
-	<td>등록일올곳</td>
-	<td>조회수올곳</td>
+    <td>
+		<a href="/board/detail.jsp"><%=rs.getString("title")%></a>
+	</td>
+    <td><%=rs.getString("author")%></td>
+	<td><%=rs.getString("regdate")%></td>
+	<td><%=rs.getInt("hit")%></td>
   </tr>
-
+	<%}%>
   <tr>
 	<td colspan="5" > 
 		<button>글등록</button>
@@ -78,3 +82,6 @@ $(function(){
 
 </body>
 </html>
+<%
+	dbManager.release(con, pstmt, rs);
+%>
