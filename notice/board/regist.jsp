@@ -1,4 +1,13 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ page import="java.sql.DriverManager"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%!
+	//선언부 영역: 멤버변수와 멤버메서드를 정의하는 영역 
+	String url="jdbc:mariadb://localhost:3306/db1202";
+	String user="root";
+	String password="1234";
+%>
 <%
 	//클라이언트가 전송한 파라미터를 받아서  mysql 에 넣을 예정이므로, 
 	//별도의 디자인 코드는 필요하지 않음 ..
@@ -21,4 +30,40 @@
 
 	//mysql insert 진행한다!!!
 	//드라이버 로드, 접속, 쿼리, 닫기 
+	Class.forName("org.mariadb.jdbc.Driver");
+	out.print("드라이버 로드 성공");
+
+	Connection con=null;
+	PreparedStatement pstmt=null;
+
+	con=DriverManager.getConnection(url, user, password);
+	if(con==null){
+		out.print("접속 실패");
+	}else{
+		out.print("접속 성공");
+
+		String sql="insert into notice(author, title, content) values(?,?,?)";
+		pstmt=con.prepareStatement(sql);
+		
+		//바인드 변수값 지정 
+		pstmt.setString(1, author);
+		pstmt.setString(2, title);
+		pstmt.setString(3, content);
+
+		int result = pstmt.executeUpdate();
+
+		if(result==0){
+			out.print("등록실패");
+		}else{
+			out.print("등록성공");
+		}
+	}
+
+	//db에 연동에 사용된 모든 객체 닫기 
+	if(pstmt!=null){
+		pstmt.close();
+	}
+	if(con!=null){
+		con.close();
+	}
 %>
