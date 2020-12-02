@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@ page import="pet.Dog"%>
+<%
+	Dog d = new Dog();
+%>
 <!DOCTYPE html>
 <html>
 <head>
